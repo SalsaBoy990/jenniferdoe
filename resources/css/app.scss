@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container-fluid {
+    max-width: 100%;
+
+    @media screen and (max-width: 1340px) {
+        max-width: 1340px;
+    }
+}
