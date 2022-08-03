@@ -6,14 +6,22 @@ use Illuminate\View\Component;
 
 class Intro extends Component
 {
+    public string $title;
+    public string $subTitle;
+    public string $description;
+    public string $profileImageUrl;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(string $title = '', string $subTitle = '', string $description = '', string $profileImageUrl = '')
     {
-        //
+        $this->title = $title;
+        $this->subTitle = $subTitle;
+        $this->description = $description;
+        $this->profileImageUrl = $profileImageUrl;
     }
 
     /**
@@ -23,6 +31,6 @@ class Intro extends Component
      */
     public function render()
     {
-        return view('components.intro');
+        return view('components.landing.intro');
     }
 }

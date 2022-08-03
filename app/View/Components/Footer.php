@@ -6,14 +6,26 @@ use Illuminate\View\Component;
 
 class Footer extends Component
 {
+    public string $emailAddress;
+    public string $phoneNumber;
+    public string $facebookLink;
+    public string $youtubeLink;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
+    public function __construct(
+        string $emailAddress = '',
+        string $phoneNumber = '',
+        string $facebookLink = '',
+        string $youtubeLink = ''
+    ) {
+        $this->emailAddress = $emailAddress;
+        $this->phoneNumber = $phoneNumber;
+        $this->facebookLink = $facebookLink;
+        $this->youtubeLink = $youtubeLink;
     }
 
     /**
@@ -23,6 +35,6 @@ class Footer extends Component
      */
     public function render()
     {
-        return view('components.footer');
+        return view('components.landing.footer');
     }
 }

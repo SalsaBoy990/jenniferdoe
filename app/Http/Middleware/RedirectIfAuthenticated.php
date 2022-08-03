@@ -23,6 +23,12 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+
+                // redirect admin user to a different route
+                if (auth()->user()->role === 'admin') {
+                    return redirect()->intended('/administration');
+                }
+
                 return redirect(RouteServiceProvider::HOME);
             }
         }

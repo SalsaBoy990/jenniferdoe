@@ -1,3 +1,7 @@
 <div>
-    <!-- Order your soul. Reduce your wants. - Augustine -->
+   <h2>{{ __('Location of my office') }}</h2>
+
+   <div>{{ $location }}</div>
+   <div>{{ __('Interior of the Consulting Room') }}</div>
+   
 </div>

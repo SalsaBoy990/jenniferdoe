@@ -9,6 +9,10 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Meta;
+use App\Models\Service;
+use App\Models\Qualification;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -58,4 +62,72 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Users' roles
+     * 
+     * @var array
+     */
+    public const ROLES = [
+        1 => 'admin',
+        2 => 'customer'
+    ];
+
+    /**
+     * Accessor for the user's role.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function role(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => self::ROLES[$value]
+        );
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCustomer(): bool
+    {
+        return $this->role === 'customer';
+    }
+
+    /**
+     * User has one meta
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function meta()
+    {
+        return $this->hasOne(Meta::class);
+    }
+
+    /**
+     * User has many services
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
+
+    /**
+     * User has many qualifications
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function qualifications()
+    {
+        return $this->hasMany(Qualification::class);
+    }
 }

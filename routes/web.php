@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MetaController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\QualificationController;
+use App\Http\Controllers\LandingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+Route::get('/', [LandingController::class, 'index'])->name('landing.page');
 
 Route::middleware([
     'auth:sanctum',
@@ -26,3 +33,12 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::group(
+    ['middleware' => ['web'], 'prefix' => ''],
+    function () {
+        Route::resource('meta', MetaController::class);
+        Route::resource('service', ServiceController::class);
+        Route::resource('qualification', QualificationController::class);
+    }
+);

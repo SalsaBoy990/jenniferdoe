@@ -6,14 +6,20 @@ use Illuminate\View\Component;
 
 class CtaArea extends Component
 {
+    public string $emailAddress;
+    public string $phoneNumber;
+    public $qualifications;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(string $emailAddress = '', string $phoneNumber = '', $qualifications)
     {
-        //
+        $this->emailAddress    = $emailAddress;
+        $this->phoneNumber     = $phoneNumber;
+        $this->qualifications   = $qualifications;
     }
 
     /**
@@ -23,6 +29,6 @@ class CtaArea extends Component
      */
     public function render()
     {
-        return view('components.cta-area');
+        return view('components.landing.cta-area');
     }
 }
