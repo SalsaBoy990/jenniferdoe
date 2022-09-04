@@ -8,6 +8,7 @@ class CtaArea extends Component
 {
     public string $emailAddress;
     public string $phoneNumber;
+    public string $phoneNumberLink;
     public $qualifications;
 
     /**
@@ -15,10 +16,11 @@ class CtaArea extends Component
      *
      * @return void
      */
-    public function __construct(string $emailAddress = '', string $phoneNumber = '', $qualifications)
+    public function __construct(string $emailAddress, string $phoneNumber, string $phoneNumberLink, $qualifications)
     {
         $this->emailAddress    = $emailAddress;
         $this->phoneNumber     = $phoneNumber;
+        $this->phoneNumberLink = $phoneNumberLink;
         $this->qualifications   = $qualifications;
     }
 

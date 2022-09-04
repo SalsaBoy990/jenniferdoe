@@ -51,4 +51,16 @@ class Meta extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Accessor for the user's phone number formatted as link
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function getPhoneNumberLinkAttribute()
+    {
+        $illegal = array('/', '+', '-', ' ');
+        $phone = str_replace($illegal, '', $this->phone_number);
+        return $phone;
+    }
 }

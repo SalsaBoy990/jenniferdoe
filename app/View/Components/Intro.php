@@ -10,18 +10,22 @@ class Intro extends Component
     public string $subTitle;
     public string $description;
     public string $profileImageUrl;
+    public string $phoneNumber;
+    public string $phoneNumberLink;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(string $title = '', string $subTitle = '', string $description = '', string $profileImageUrl = '')
+    public function __construct(string $title = '', string $subTitle = '', string $description = '', string $profileImageUrl = '', string $phoneNumber = '', string $phoneNumberLink = '')
     {
         $this->title = $title;
         $this->subTitle = $subTitle;
         $this->description = $description;
         $this->profileImageUrl = $profileImageUrl;
+        $this->phoneNumber = $phoneNumber;
+        $this->phoneNumberLink = $phoneNumberLink;
     }
 
     /**

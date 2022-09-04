@@ -29,16 +29,25 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
+    Route::get('/admin/dashboard', function () {
+        return view('admin/dashboard');
     })->name('dashboard');
 });
 
 Route::group(
-    ['middleware' => ['web'], 'prefix' => ''],
+    ['middleware' => ['web'], 'prefix' => 'admin'],
     function () {
-        Route::resource('meta', MetaController::class);
-        Route::resource('service', ServiceController::class);
-        Route::resource('qualification', QualificationController::class);
+        Route::get('meta', [MetaController::class, 'index'])->name('meta.index');
+        Route::put('meta/{meta}', [MetaController::class, 'update'])->name('meta.update');
+
+        Route::get('service', [ServiceController::class, 'index'])->name('service.index');
+        Route::post('service', [ServiceController::class, 'store'])->name('service.store');
+        Route::put('service/{service}', [ServiceController::class, 'update'])->name('service.update');
+        Route::delete('service/{service}', [ServiceController::class, 'destroy'])->name('service.destroy');
+
+        Route::get('qualification', [QualificationController::class, 'index'])->name('service.index');
+        Route::post('qualification', [QualificationController::class, 'store'])->name('service.store');
+        Route::put('qualification/{qualification}', [QualificationController::class, 'update'])->name('service.update');
+        Route::delete('qualification/{qualification}', [QualificationController::class, 'destroy'])->name('service.destroy');
     }
 );
