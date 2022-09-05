@@ -70,7 +70,7 @@ class User extends Authenticatable
      */
     public const ROLES = [
         1 => 'admin',
-        2 => 'customer'
+        2 => 'client'
     ];
 
     /**
@@ -96,9 +96,9 @@ class User extends Authenticatable
     /**
      * @return bool
      */
-    public function isCustomer(): bool
+    public function isClient(): bool
     {
-        return $this->role === 'customer';
+        return $this->role === 'client';
     }
 
     /**

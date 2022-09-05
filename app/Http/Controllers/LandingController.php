@@ -20,8 +20,8 @@ class LandingController extends Controller
         $meta->profile_image_url = Storage::url($meta->profile_image_url);
         $meta->seo_image_url = Storage::url($meta->seo_image_url);
         
-        $services = Service::where('user_id', 1)->orderBy('order', 'ASC')->get();
-        $qualifications = Qualification::where('user_id', 1)->orderBy('order', 'ASC')->get();
+        $services = Service::orderBy('order', 'ASC')->get();
+        $qualifications = Qualification::orderBy('order', 'ASC')->get();
 
 
         return view('welcome')->with([

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Qualification;
 use Illuminate\Http\Request;
+use App\Support\InteractsWithBanner;
 
 class QualificationController extends Controller
 {
+    use InteractsWithBanner;
+
     /**
      * Display a listing of the resource.
      *
@@ -14,10 +17,24 @@ class QualificationController extends Controller
      */
     public function index()
     {
-        $qualifications = Qualification::all();
+        $this->authorize('viewAny', Qualification::class);
+
+        $qualifications = Qualification::orderBy('order', 'ASC')->get();
         return view('admin.qualification.index')->with([
             'qualifications' => $qualifications
         ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $this->authorize('create', Qualification::class);
+
+        return view('admin.qualification.create');
     }
 
     /**
@@ -28,6 +45,8 @@ class QualificationController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Qualification::class);
+
         $request->validate([
             'date' => ['required', 'max:255'],
             'description' => ['required', 'max:255'],
@@ -45,6 +64,23 @@ class QualificationController extends Controller
         return redirect()->route('qualification.index');
     }
 
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Service  $qualification
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Qualification $qualification)
+    {
+        $this->authorize('view', Qualification::class);
+
+        return view('admin.qualification.show')->with([
+            'qualification' => $qualification,
+        ]);
+    }
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -54,6 +90,8 @@ class QualificationController extends Controller
      */
     public function update(Request $request, Qualification $qualification)
     {
+        //$this->authorize('update', Qualification::class);
+
         $request->validate([
             'date' => ['required', 'max:255'],
             'description' => ['required', 'max:255'],
@@ -78,10 +116,12 @@ class QualificationController extends Controller
      */
     public function destroy(Qualification $qualification)
     {
+        $this->authorize('delete', Qualification::class);
+
         $oldDate = htmlentities($qualification->date);
         $qualification->deleteOrFail();
 
-        $this->banner('Successfully deleted the qaulification with the date "' . htmlentities($oldDate) . '"!');
+        $this->banner('Successfully deleted the qualification with the date "' . htmlentities($oldDate) . '"!');
         return redirect()->route('qualification.index');
     }
 }

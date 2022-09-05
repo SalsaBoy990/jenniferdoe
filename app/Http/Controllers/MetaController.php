@@ -26,6 +26,8 @@ class MetaController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Meta::class);
+
         $meta = Meta::findOrFail(1);
         $meta->profile_image_url = Storage::url($meta->profile_image_url);
         $meta->seo_image_url = Storage::url($meta->seo_image_url);
@@ -44,6 +46,8 @@ class MetaController extends Controller
      */
     public function update(Request $request, Meta $meta)
     {
+        $this->authorize('update', Meta::class);
+
         $request->validate([
             'title' => ['required', 'max:255'],
             'seo_title' => ['required', 'max:255'],
