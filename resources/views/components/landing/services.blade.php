@@ -10,7 +10,7 @@
                 <div class="flex flex-col justify-center text-center max-w-344">
 
                     <img class="mx-auto h-16 w-16 rounded-full"
-                        src="{{ asset('/storage/images/' . $service->logo_image_url) }}" alt="{{ $service->title }}">
+                        src="{{ $service->logo_image_url_link }}" alt="{{ $service->title }}">
 
                     <h3 class="text-22px mb-10px font-bold text-white">{{ $service->title }}</h3>
                     <div class="text-white80pc text-lg md:text-lg">{!! $service->description !!}</div>

@@ -21,10 +21,16 @@
                     {!! $description !!}
                 </div>
 
-                <div class="flex justify-center space-x-2 sm:justify-start lg:hidden">
+                <div class="flex justify-center space-x-2 sm:justify-start md:justify-start lg:hidden">
                     <a href="{{ 'tel:+' . $phoneNumberLink }}"
-                        class="bg-accent-turquoise leading-wide hover:bg-main-blue focus:bg-main-blue active:bg-main-blue inline-block rounded px-6 py-2.5 text-lg font-medium uppercase text-black shadow-md transition duration-150 ease-in-out hover:text-white hover:shadow-lg focus:text-white focus:shadow-lg focus:outline-none focus:ring-0 active:text-white active:shadow-lg">
-                        {{ __('Call: ') . $phoneNumber }}
+                        class="bg-main-blue inline-flex leading-wide hover:bg-accent-turquoise focus:bg-main-blue active:bg-main-blue rounded px-6 py-2.5 text-lg font-medium uppercase text-white shadow-md transition duration-150 ease-in-out hover:text-white hover:shadow-lg focus:text-white focus:shadow-lg focus:outline-none focus:ring-0 active:text-white active:shadow-lg">
+                        <div class="inline-block relative top-1">
+
+                            <x-icon.phone></x-icon.phone>
+                        </div>
+                        <span class="ml-1">
+                            {{ $phoneNumber }}
+                        </span>
                     </a>
                 </div>
             </div>
